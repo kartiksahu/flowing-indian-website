@@ -1,7 +1,17 @@
 export default function PhilosophySection() {
     return (
-        <section id="philosophy" className="py-32 px-6 bg-background">
-            <div className="max-w-4xl mx-auto text-center space-y-12">
+        <section id="philosophy" className="relative py-32 px-6 bg-background overflow-hidden">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+                <div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background z-10" />
+                <img
+                    src="/images/philosophy-bg.jpg"
+                    alt="Rope Flow Pattern"
+                    className="w-full h-full object-cover opacity-30"
+                />
+            </div>
+
+            <div className="relative z-20 max-w-4xl mx-auto text-center space-y-12">
                 <div className="space-y-6">
                     <h2 className="text-3xl md:text-5xl font-bold text-primary">
                         The Philosophy

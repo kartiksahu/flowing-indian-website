@@ -26,14 +26,14 @@ export default function Footer() {
                     <p className="text-primary font-medium">Stay in the Flow</p>
                     <div className="flex items-center justify-center md:justify-start gap-6">
                         <a
-                            href="mailto:hello@flowingindian.com"
+                            href="mailto:contact@flowingindian.com"
                             className="text-secondary hover:text-accent transition-colors"
                             aria-label="Email"
                         >
                             <Mail size={24} />
                         </a>
                         <a
-                            href="https://instagram.com/flowing.indian"
+                            href="https://www.instagram.com/flowing_indian/"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-secondary hover:text-accent transition-colors"
@@ -42,7 +42,9 @@ export default function Footer() {
                             <Instagram size={24} />
                         </a>
                         <a
-                            href="#"
+                            href="https://youtube.com/@flowingindian?si=41xbP7d9sRJLDrcZ"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="text-secondary hover:text-accent transition-colors"
                             aria-label="YouTube"
                         >
@@ -56,8 +58,8 @@ export default function Footer() {
                 <p>© {new Date().getFullYear()} Flowing Indian. All rights reserved.</p>
                 <p>
                     For collaborations, workshops or bulk orders:{" "}
-                    <a href="mailto:hello@flowingindian.com" className="text-secondary hover:text-primary transition-colors">
-                        hello@flowingindian.com
+                    <a href="mailto:contact@flowingindian.com" className="text-secondary hover:text-primary transition-colors">
+                        contact@flowingindian.com
                     </a>
                 </p>
             </div>
