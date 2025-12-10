@@ -1,26 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer theme {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Earthy Color Palette */
+    --color-background: #0e0e0c;
+    --color-section: #151512;
+    --color-primary: #f5f4f0;
+    --color-secondary: #c8c6be;
+    --color-accent: #c46a2b;
+    --color-muted: #8f9779;
+    --color-border: #2a2a26;
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
+  background-color: var(--color-background);
+  color: var(--color-primary);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+p {
+  line-height: 1.7;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .bg-background {
+    background-color: var(--color-background);
+  }
+
+  .bg-section {
+    background-color: var(--color-section);
+  }
+
+  .bg-accent {
+    background-color: var(--color-accent);
+  }
+
+  .text-primary {
+    color: var(--color-primary);
+  }
+
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+
+  .text-accent {
+    color: var(--color-accent);
+  }
+
+  .text-muted {
+    color: var(--color-muted);
+  }
+
+  .border-border {
+    border-color: var(--color-border);
+  }
+
+  .border-muted {
+    border-color: var(--color-muted);
+  }
+
+  .border-accent {
+    border-color: var(--color-accent);
+  }
+
+  .hover\:bg-accent\/90:hover {
+    background-color: color-mix(in srgb, var(--color-accent) 90%, transparent);
+  }
+
+  .hover\:bg-section:hover {
+    background-color: var(--color-section);
+  }
+
+  .hover\:text-accent:hover {
+    color: var(--color-accent);
+  }
+
+  .hover\:text-primary:hover {
+    color: var(--color-primary);
+  }
+
+  .hover\:border-muted:hover {
+    border-color: var(--color-muted);
+  }
+
+  .hover\:border-muted\/50:hover {
+    border-color: color-mix(in srgb, var(--color-muted) 50%, transparent);
+  }
+
+  .hover\:border-accent\/50:hover {
+    border-color: color-mix(in srgb, var(--color-accent) 50%, transparent);
+  }
+
+  .border-accent\/30 {
+    border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+  }
+
+  .text-secondary\/70 {
+    color: color-mix(in srgb, var(--color-secondary) 70%, transparent);
+  }
+
+  .text-secondary\/80 {
+    color: color-mix(in srgb, var(--color-secondary) 80%, transparent);
+  }
+
+  .text-secondary\/60 {
+    color: color-mix(in srgb, var(--color-secondary) 60%, transparent);
+  }
+
+  .bg-background\/95 {
+    background-color: color-mix(in srgb, var(--color-background) 95%, transparent);
+  }
+
+  .bg-background\/80 {
+    background-color: color-mix(in srgb, var(--color-background) 80%, transparent);
+  }
+
+  .selection\:bg-accent::selection {
+    background-color: var(--color-accent);
+  }
+
+  .selection\:text-white::selection {
+    color: white;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.6s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out forwards;
+  }
+
+  .max-w-container {
+    max-width: 1200px;
+  }
 }
