@@ -20,12 +20,12 @@ export default function ProductsSection() {
                         id="hybrid-rope"
                         label="Product • Rope"
                         name="Hybrid Flow Rope"
-                        tagline="Versatile, forgiving and playful."
-                        description="A lighter, all-round rope for learning and exploring. The Hybrid Flow Rope is perfect for beginners and for anyone who wants one rope they can use anywhere."
+                        tagline="Heavy, grounded, powerful."
+                        description="A denser rope for slower, stronger patterns. The Hybrid Flow Rope helps you feel every path of the rope so you build timing, coordination and strength together."
                         highlights={[
-                            "Beginner-friendly",
-                            "Works indoors & outdoors",
-                            "One rope for multiple styles",
+                            "Great for strength + rhythm",
+                            "Slower feedback, deeper feel",
+                            "Recommended for intermediate movers",
                         ]}
                         price="₹2,000"
                         ctaText="Get Hybrid Rope"
@@ -38,12 +38,12 @@ export default function ProductsSection() {
                         id="black-mamba"
                         label="Product • Rope"
                         name="Black Mamba Rope"
-                        tagline="Heavy, grounded, powerful."
-                        description="A denser rope for slower, stronger patterns. Black Mamba helps you feel every path of the rope so you build timing, coordination and strength together."
+                        tagline="Versatile, forgiving and playful."
+                        description="A lighter, all-round rope for learning and exploring. Black Mamba is perfect for beginners and for anyone who wants one rope they can use anywhere."
                         highlights={[
-                            "Great for strength + rhythm",
-                            "Slower feedback, deeper feel",
-                            "Recommended for intermediate movers",
+                            "Beginner-friendly",
+                            "Works indoors & outdoors",
+                            "One rope for multiple styles",
                         ]}
                         price="₹1,500"
                         ctaText="Get Black Mamba"
