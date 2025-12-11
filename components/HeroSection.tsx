@@ -74,7 +74,7 @@ export default function HeroSection() {
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </Link>
                     <Link
-                        href="#one-to-one"
+                        href="/products/one-to-one"
                         className="w-full sm:w-auto px-10 py-4 bg-transparent hover:bg-section text-primary font-semibold rounded-md transition-all duration-300 border border-border hover:border-muted"
                     >
                         Book 1:1 Practice

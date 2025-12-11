@@ -28,8 +28,8 @@ export default function ProductsSection() {
                             "Recommended for intermediate movers",
                         ]}
                         price="₹2,000"
-                        ctaText="Get Hybrid Rope"
-                        ctaLink="#contact"
+                        ctaText="View Details"
+                        ctaLink="/products/hybrid-rope"
                         imageSrc="/images/hybrid-rope.jpg"
                     />
 
@@ -46,8 +46,8 @@ export default function ProductsSection() {
                             "One rope for multiple styles",
                         ]}
                         price="₹1,500"
-                        ctaText="Get Black Mamba"
-                        ctaLink="#contact"
+                        ctaText="View Details"
+                        ctaLink="/products/black-mamba"
                         isPrimary={true}
                         imageSrc="/images/black-mamba.jpg"
                     />
@@ -58,14 +58,14 @@ export default function ProductsSection() {
                         label="Service • Coaching"
                         name="1:1 Flow Practice"
                         tagline="Personal guidance for your body, your life."
-                        description="A private session where we blend rope flow, ground flow and other tools based on what you need most — mobility, coordination, strength, or simply feeling at home in your body again."
+                        description="A private online session where we blend rope flow, ground flow and other tools based on what you need most — mobility, coordination, strength, or simply feeling at home in your body again."
                         highlights={[
-                            "Online or in-person (where possible)",
+                            "Convenient online sessions",
                             "Tailored to your body and background",
                             "Great next step after getting a rope",
                         ]}
-                        ctaText="Book a 1:1 Session"
-                        ctaLink="#contact"
+                        ctaText="Book a Session"
+                        ctaLink="/products/one-to-one"
                         imageSrc="/images/about.jpg"
                     />
                 </div>
