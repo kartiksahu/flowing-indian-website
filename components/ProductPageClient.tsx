@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Check, ShoppingCart, Package, Info } from "lucide-react";
 import { Product } from "@/lib/products";
 import BookingForm from "./BookingForm";
+import CheckoutModal from "./CheckoutModal";
 
 interface ProductPageClientProps {
     product: Product;
@@ -12,6 +13,7 @@ interface ProductPageClientProps {
 
 export default function ProductPageClient({ product }: ProductPageClientProps) {
     const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
+    const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
     const isService = product.isService;
 
     return (
@@ -58,15 +60,13 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                                         <span className="text-secondary/70">per rope</span>
                                     </div>
 
-                                    <a
-                                        href={product.paymentLink}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent hover:bg-accent/90 text-white font-semibold rounded-md transition-all duration-300 w-full md:w-auto"
+                                    <button
+                                        onClick={() => setIsCheckoutOpen(true)}
+                                        className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-accent hover:bg-accent/90 text-white font-semibold rounded-md transition-all duration-300 w-full md:w-auto cursor-pointer"
                                     >
                                         <ShoppingCart size={20} />
                                         Buy Now - {product.price}
-                                    </a>
+                                    </button>
                                 </>
                             )}
 
@@ -178,15 +178,13 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                             <p className="text-lg text-secondary">
                                 Get your {product.name} today and experience the difference.
                             </p>
-                            <a
-                                href={product.paymentLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-accent hover:bg-accent/90 text-white font-semibold rounded-md transition-all duration-300 text-lg"
+                            <button
+                                onClick={() => setIsCheckoutOpen(true)}
+                                className="inline-flex items-center justify-center gap-2 px-10 py-5 bg-accent hover:bg-accent/90 text-white font-semibold rounded-md transition-all duration-300 text-lg cursor-pointer"
                             >
                                 <ShoppingCart size={22} />
                                 Buy Now - {product.price}
-                            </a>
+                            </button>
                         </div>
                     ) : (
                         <BookingForm />
@@ -230,6 +228,12 @@ export default function ProductPageClient({ product }: ProductPageClientProps) {
                     </div>
                 </div>
             </section>
+
+            <CheckoutModal
+                isOpen={isCheckoutOpen}
+                onClose={() => setIsCheckoutOpen(false)}
+                product={product}
+            />
         </div>
     );
 }
