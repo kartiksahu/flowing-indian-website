@@ -89,7 +89,7 @@ export const products: Record<string, Product> = {
             length: "Adjustable",
             material: "Polyester"
         },
-        paymentLink: "https://rzp.io/rzp/Fhy9QdpO",
+        paymentLink: "https://rzp.io/rzp/xCiT2Iv",
         imageSrc: "/images/hybrid-rope.jpg",
         faqs: [
             {
