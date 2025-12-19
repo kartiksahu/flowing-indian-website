@@ -46,7 +46,7 @@ export const products: Record<string, Product> = {
             length: "Adjustable",
             material: "Polyester"
         },
-        paymentLink: "https://rzp.io/rzp/EOdWpfSP",
+        paymentLink: "https://rzp.io/rzp/UvumEaAC",
         imageSrc: "/images/black-mamba.jpg",
         faqs: [
             {
