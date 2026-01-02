@@ -13,66 +13,119 @@ function ThankYouContent() {
     const [status, setStatus] = useState<"processing" | "sent" | "error">("processing");
 
     useEffect(() => {
-        const sendOrderEmail = async () => {
+        const sendEmail = async () => {
             const pendingOrder = localStorage.getItem("pendingOrder");
+            const pendingEventRegistration = localStorage.getItem("pendingEventRegistration");
 
-            if (!pendingOrder) {
-                setStatus("sent"); // No pending order, just show success
+            // Case 1: Product Order
+            if (pendingOrder) {
+                try {
+                    const orderDetails = JSON.parse(pendingOrder);
+                    const { product, customer } = orderDetails;
+
+                    const response = await fetch("https://api.web3forms.com/submit", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                            access_key: "72544932-567e-4c86-845e-edf0725d708b",
+                            subject: `New Order (Paid): ${product.name} - ${customer.name}`,
+                            from_name: "Flowing Indian Checkout",
+                            message: `
+                                PAYMENT SUCCESSFUL - NEW ORDER
+                                
+                                Payment ID: ${paymentId || "Not captured"}
+                                Product: ${product.name}
+                                Price: ${product.price}
+                                
+                                Customer Details:
+                                Name: ${customer.name}
+                                Email: ${customer.email}
+                                Phone: ${customer.phone}
+                                
+                                Shipping Address:
+                                ${customer.address}
+                                ${customer.city}, ${customer.state} - ${customer.pincode}
+                                
+                                Order Timestamp: ${orderDetails.timestamp}
+                            `,
+                            ...customer
+                        }),
+                    });
+
+                    const result = await response.json();
+                    if (result.success) {
+                        localStorage.removeItem("pendingOrder");
+                        setStatus("sent");
+                    } else {
+                        setStatus("error");
+                    }
+                } catch (error) {
+                    console.error("Failed to send order email", error);
+                    setStatus("error");
+                }
                 return;
             }
 
-            try {
-                const orderDetails = JSON.parse(pendingOrder);
-                const { product, customer } = orderDetails;
+            // Case 2: Event Registration
+            if (pendingEventRegistration) {
+                try {
+                    const registrationDetails = JSON.parse(pendingEventRegistration);
+                    const { event, participant } = registrationDetails;
 
-                // Send details to Web3Forms
-                const response = await fetch("https://api.web3forms.com/submit", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                        Accept: "application/json",
-                    },
-                    body: JSON.stringify({
-                        access_key: "72544932-567e-4c86-845e-edf0725d708b",
-                        subject: `New Order (Paid): ${product.name} - ${customer.name}`,
-                        from_name: "Flowing Indian Checkout",
-                        message: `
-                            PAYMENT SUCCESSFUL - NEW ORDER
-                            
-                            Payment ID: ${paymentId || "Not captured"}
-                            Product: ${product.name}
-                            Price: ${product.price}
-                            
-                            Customer Details:
-                            Name: ${customer.name}
-                            Email: ${customer.email}
-                            Phone: ${customer.phone}
-                            
-                            Shipping Address:
-                            ${customer.address}
-                            ${customer.city}, ${customer.state} - ${customer.pincode}
-                            
-                            Order Timestamp: ${orderDetails.timestamp}
-                        `,
-                        ...customer
-                    }),
-                });
+                    const response = await fetch("https://api.web3forms.com/submit", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Accept: "application/json",
+                        },
+                        body: JSON.stringify({
+                            access_key: "72544932-567e-4c86-845e-edf0725d708b",
+                            subject: `New Workshop Registration: ${event.title} - ${participant.name}`,
+                            from_name: "Flowing Indian Events",
+                            message: `
+                                PAYMENT SUCCESSFUL - WORKSHOP REGISTRATION
+                                
+                                Payment ID: ${paymentId || "Not captured"}
+                                Event: ${event.title}
+                                Date: ${event.date}
+                                Venue: ${event.venue}
+                                Price: ${event.price}
+                                
+                                Participant Details:
+                                Name: ${participant.name}
+                                Email: ${participant.email}
+                                Phone: ${participant.phone}
+                                Age: ${participant.age}
+                                Experience: ${participant.experience}
+                                
+                                Registration Timestamp: ${registrationDetails.timestamp}
+                            `,
+                            ...participant
+                        }),
+                    });
 
-                const result = await response.json();
-
-                if (result.success) {
-                    localStorage.removeItem("pendingOrder"); // Clear order after sending
-                    setStatus("sent");
-                } else {
+                    const result = await response.json();
+                    if (result.success) {
+                        localStorage.removeItem("pendingEventRegistration");
+                        setStatus("sent");
+                    } else {
+                        setStatus("error");
+                    }
+                } catch (error) {
+                    console.error("Failed to send registration email", error);
                     setStatus("error");
                 }
-            } catch (error) {
-                console.error("Failed to send order email", error);
-                setStatus("error");
+                return;
             }
+
+            // No pending actions
+            setStatus("sent");
         };
 
-        sendOrderEmail();
+        sendEmail();
     }, [paymentId]);
 
     return (
@@ -90,11 +143,11 @@ function ThankYouContent() {
                     </div>
 
                     <h1 className="text-3xl md:text-4xl font-bold text-primary">
-                        Payment Successful!
+                        {status === "sent" ? "Success!" : "Payment Successful!"}
                     </h1>
 
                     <p className="text-secondary text-lg leading-relaxed">
-                        Thank you for your order. We have received your details and will process your shipment shortly.
+                        Thank you! We have received your details and confirmation has been sent to us.
                     </p>
 
                     {paymentId && (
@@ -117,11 +170,11 @@ function ThankYouContent() {
                             </li>
                             <li className="flex gap-3">
                                 <span className="text-accent font-bold">2.</span>
-                                <span>Our team will prepare your order for shipping.</span>
+                                <span>We will verify your registration/order.</span>
                             </li>
                             <li className="flex gap-3">
                                 <span className="text-accent font-bold">3.</span>
-                                <span>We will share the tracking details once shipped.</span>
+                                <span>Check your email for further details.</span>
                             </li>
                         </ul>
                     </div>
