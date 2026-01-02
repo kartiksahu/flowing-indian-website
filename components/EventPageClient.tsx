@@ -49,6 +49,16 @@ export default function EventPageClient({ event }: EventPageClientProps) {
                         </div>
                     </div>
 
+                    {event.imageSrc && (
+                        <div className="mb-8 rounded-lg overflow-hidden border border-border">
+                            <img
+                                src={event.imageSrc}
+                                alt={event.title}
+                                className="w-full h-64 md:h-96 object-cover"
+                            />
+                        </div>
+                    )}
+
                     <div className="p-6 bg-section border border-border rounded-lg max-w-3xl">
                         <p className="text-lg md:text-xl text-secondary leading-relaxed">
                             {event.description}
@@ -121,15 +131,43 @@ export default function EventPageClient({ event }: EventPageClientProps) {
                             </div>
 
                             <div className="space-y-4">
-                                <button
-                                    onClick={() => setIsRegistrationOpen(true)}
-                                    className="w-full py-4 bg-accent hover:bg-accent/90 text-white font-bold text-lg rounded-md transition-all duration-300 shadow-lg hover:shadow-accent/20 hover:translate-y-[-2px]"
-                                >
-                                    Register Now
-                                </button>
-                                <p className="text-xs text-center text-secondary">
-                                    Secure payment via Razorpay. <br />Limited spots available.
-                                </p>
+                                {event.paymentLink ? (
+                                    <>
+                                        <button
+                                            onClick={() => setIsRegistrationOpen(true)}
+                                            className="w-full py-4 bg-accent hover:bg-accent/90 text-white font-bold text-lg rounded-md transition-all duration-300 shadow-lg hover:shadow-accent/20 hover:translate-y-[-2px]"
+                                        >
+                                            Register Now
+                                        </button>
+                                        <p className="text-xs text-center text-secondary">
+                                            Secure payment via Razorpay. <br />Limited spots available.
+                                        </p>
+                                    </>
+                                ) : (
+                                    <>
+                                        {event.venueLink ? (
+                                            <a
+                                                href={event.venueLink}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="flex items-center justify-center gap-2 w-full py-4 bg-primary hover:bg-primary/90 text-white font-bold text-lg rounded-md transition-all duration-300 shadow-lg hover:translate-y-[-2px]"
+                                            >
+                                                <MapPin size={20} />
+                                                Get Directions
+                                            </a>
+                                        ) : (
+                                            <button
+                                                disabled
+                                                className="w-full py-4 bg-secondary/20 text-secondary font-bold text-lg rounded-md cursor-not-allowed"
+                                            >
+                                                Pay at Venue
+                                            </button>
+                                        )}
+                                        <p className="text-xs text-center text-secondary">
+                                            No online registration required. <br />Please pay at the venue.
+                                        </p>
+                                    </>
+                                )}
                             </div>
 
                             <div className="pt-4 border-t border-border space-y-3">

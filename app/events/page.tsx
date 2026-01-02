@@ -36,14 +36,21 @@ export default function EventsPage() {
                                     className="group bg-section border border-border rounded-lg overflow-hidden hover:border-accent transition-all duration-300 flex flex-col animate-fade-in"
                                     style={{ animationDelay: `${index * 100}ms` }}
                                 >
-                                    <div className="p-8 flex-grow space-y-6">
+                                    {event.imageSrc ? (
+                                        <div className="h-48 overflow-hidden border-b border-border">
+                                            <img
+                                                src={event.imageSrc}
+                                                alt={event.title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                                            />
+                                        </div>
+                                    ) : null}
+
+                                    <div className="p-6 flex-grow space-y-4">
                                         <div>
-                                            <h3 className="text-2xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
+                                            <h3 className="text-xl font-bold text-primary mb-2 group-hover:text-accent transition-colors">
                                                 {event.title}
                                             </h3>
-                                            <p className="text-secondary leading-relaxed">
-                                                {event.description}
-                                            </p>
                                         </div>
 
                                         <div className="space-y-3 text-sm text-secondary/80">
